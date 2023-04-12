@@ -13,19 +13,15 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    background = Green100,
+    surface = Green50,
+    onSurface = Grey900,
+    primary = Grey50,
+    onPrimary = Grey900,
+    secondary = Grey700
 )
+
+// WoofTheme is defined below
 
 @Composable
 fun WoofTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
