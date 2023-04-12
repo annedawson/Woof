@@ -99,13 +99,16 @@ fun DogInformation(@StringRes dogName: Int, dogAge: Int, modifier: Modifier = Mo
     Column {
         Text(
             text = stringResource(dogName),
+            color = MaterialTheme.colors.onSurface,  //Grey900 - almost black
             modifier = modifier.padding(top = 8.dp)
         )
         Text(
-            text = stringResource(R.string.years_old, dogAge)
+            text = stringResource(R.string.years_old, dogAge),
+            color = MaterialTheme.colors.onSurface  //Grey900 - almost black
         )
     }
 }
+
 
 /**
  * Composable that displays what the UI of the app looks like in light theme in the design tab.
