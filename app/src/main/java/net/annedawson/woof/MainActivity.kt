@@ -114,11 +114,13 @@ fun DogInformation(@StringRes dogName: Int, dogAge: Int, modifier: Modifier = Mo
             //color = MaterialTheme.colors.onSurface,  //Grey900 - almost black
             // since text is displayed on a Card - which is a surface
             // onSurface color defaults now
+            style = MaterialTheme.typography.h2,
             modifier = modifier.padding(top = 8.dp)
         )
         Text(
             text = stringResource(R.string.years_old, dogAge),
             //color = MaterialTheme.colors.onSurface  //Grey900 - almost black
+            style = MaterialTheme.typography.body1
         )
     }
 }
