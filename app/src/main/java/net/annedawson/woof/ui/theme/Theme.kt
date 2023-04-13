@@ -37,7 +37,7 @@ fun WoofTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable (
     MaterialTheme(
         colors = colors,
         typography = Typography,
-        shapes = Shapes,
+        shapes = Shapes,  // do a Ctrl B on Shapes for origin
         content = content
     )
 }
