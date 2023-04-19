@@ -1,5 +1,6 @@
 package net.annedawson.woof
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,7 +13,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,6 +42,7 @@ class MainActivity : ComponentActivity() {
 /**
  * Composable that displays an app bar and a list of dogs.
  */
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun WoofApp() {
     Scaffold(
@@ -66,20 +70,73 @@ fun WoofApp() {
  */
 @Composable
 fun DogItem(dog: Dog, modifier: Modifier = Modifier) {
+    var expanded by remember { mutableStateOf(false) }
     Card(
-        modifier = modifier.padding(8.dp), elevation = 4.dp
-    ) {  // card is a medium component in Shape.kt change to 16.dp
-        Row(
-            modifier = Modifier  // a new instance of Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-            //.background(MaterialTheme.colors.surface) // not needed as Card surface color used now
-        ) {
-            DogIcon(dog.imageResourceId)
-            DogInformation(dog.name, dog.age)
+        elevation = 4.dp,
+        modifier = modifier.padding(8.dp)
+    )  // card is a medium component in Shape.kt change to 16.dp
+    {
+        Column() {
+            Row(
+                modifier = Modifier // a new instance of Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                //.background(MaterialTheme.colors.surface)
+                // not needed as Card surface color used now
+            ) {
+                DogIcon(dog.imageResourceId)
+                DogInformation(dog.name, dog.age)
+                Spacer(Modifier.weight(1f))
+                DogItemButton(
+                    expanded = expanded,
+                    onClick = { expanded = !expanded },
+                )
+            }
+            DogHobby(dog.hobbies)
         }
     }
 }
+
+
+
+
+@Composable
+private fun DogItemButton(
+    expanded: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    IconButton(onClick = onClick) {
+        Icon(
+            imageVector = Icons.Filled.ExpandMore,
+            tint = MaterialTheme.colors.secondary,
+            contentDescription = stringResource(R.string.expand_button_content_description)
+        )
+    }
+}
+
+
+@Composable
+fun DogHobby(@StringRes dogHobby: Int, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.padding(
+            start = 16.dp,
+            top = 8.dp,
+            bottom = 16.dp,
+            end = 16.dp
+        )
+    ) {
+        Text(
+            text = stringResource(R.string.about),
+            style = MaterialTheme.typography.h3
+        )
+        Text(
+            text = stringResource(dogHobby),
+            style = MaterialTheme.typography.body1
+        )
+    }
+}
+
 
 /**
  * Composable that displays a photo of a dog.
